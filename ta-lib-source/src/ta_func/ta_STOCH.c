@@ -225,7 +225,7 @@
 /* Generated */                       MInteger     outNBElement,
 /* Generated */                       double        outSlowK[],
 /* Generated */                       double        outSlowD[] )
-/* Generated */ #else
+/* Generated */ #endif
 /* Generated */ TA_RetCode TA_STOCH( int    startIdx,
 /* Generated */                      int    endIdx,
 /* Generated */                      const double inHigh[],
@@ -240,7 +240,7 @@
 /* Generated */                      int          *outNBElement,
 /* Generated */                      double        outSlowK[],
 /* Generated */                      double        outSlowD[] )
-/* Generated */ #endif
+
 /**** END GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
 {
    /* Insert local variables here. */

@@ -1,4 +1,4 @@
-const ModuleCompiler = require('../build/talib.wrapped.min');
+const ModuleCompiler = require('../build/talib.wrapped');
 const wrapTalibFunction = require('./wrap-talib-function');
 
 const ModulePromise = ModuleCompiler();

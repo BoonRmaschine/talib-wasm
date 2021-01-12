@@ -5,6 +5,7 @@
   "main": "build/main.js",
   "scripts": {
     "build": "bash ./build.sh && webpack",
+    "build:debug": "bash ./build-debug.sh && webpack",
     "deep-update-deps": "eval $(node -e \"console.log('npm i -S ' + Object.keys(require('./package.json').dependencies || {}).map(v => v + '@latest').join(' ') + ' && ' + 'npm i --save-dev ' + Object.keys(require('./package.json').devDependencies).map(v => v + '@latest').join(' '))\")",
     "test": "jest"
   },
