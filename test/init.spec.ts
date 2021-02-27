@@ -1,4 +1,4 @@
-const TAPromise = require("../build/main");
+import TAPromise from "../build/main";
 
 describe("Basic tests", () => {
   it("Has describe function", async () => {
@@ -15,43 +15,32 @@ describe("Basic tests", () => {
   });
 
   describe("TA functions test", () => {
-    it("STOCH output", async () => {
+    it("Nested TA functions", async () => {
       const TAFunctions = await TAPromise;
 
-      const inputArrayHigh = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      const inputArrayLow = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      const inputArrayClose = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const inputArrayHigh = [];
+      const inputArrayLow = [];
+      const inputArrayClose = [];
 
-      const resultMACD = await TAFunctions.MACD({
+      for (let index = 0; index < 50; index++) {
+        inputArrayLow.push(100 + index);
+        inputArrayHigh.push(200 + index);
+        inputArrayClose.push(300 + index);
+      }
+
+      const resultMA = await TAFunctions.MA({
         inReal: inputArrayClose,
-        startIdx: 0,
-        endIdx: inputArrayClose.length - 1,
-        optInFastPeriod: 2,
-        optInSlowPeriod: 3,
-        optInSignalPeriod: 5,
+        optInTimePeriod: 3,
       });
 
-      console.log(resultMACD)
-
-      expect(resultMACD.outMACD.length).not.toEqual(0);
-      expect(resultMACD.outMACDSignal.length).not.toEqual(0);
-      expect(resultMACD.outMACDHist.length).not.toEqual(0);
-      expect(resultMACD.outMACD[resultMACD.outMACD.length - 1]).not.toEqual(0);
-      expect(resultMACD.outMACDSignal[resultMACD.outMACDSignal.length - 1]).not.toEqual(0);
-      expect(resultMACD.outMACDHist[resultMACD.outMACDHist.length - 1]).not.toEqual(0);
+      expect(resultMA.outReal.length).not.toEqual(0);
+      expect(resultMA.outReal[0]).not.toEqual(0);
 
       const resultStochF = await TAFunctions.STOCHF({
         High: inputArrayHigh,
         Low: inputArrayLow,
         Close: inputArrayClose,
-        startIdx: 0,
-        endIdx: inputArrayClose.length - 1,
-        optInFast_KPeriod: 2,
-        optInFast_DPeriod: 5,
-        optInFast_DMA: "0",
       });
-
-      console.log(resultStochF)
 
       expect(resultStochF.outFastD).not.toEqual(0);
       expect(resultStochF.outFastK).not.toEqual(0);
@@ -62,16 +51,7 @@ describe("Basic tests", () => {
         High: inputArrayHigh,
         Low: inputArrayLow,
         Close: inputArrayClose,
-        startIdx: 0,
-        endIdx: inputArrayClose.length - 1,
-        optInFast_KPeriod: 2,
-        optInSlow_KPeriod: 3,
-        optInSlow_KMA: "0",
-        optInSlow_DPeriod: 5,
-        optInSlow_DMA: "0",
       });
-
-      console.log(resultStoch)
 
       expect(resultStoch.outSlowD).not.toEqual(0);
       expect(resultStoch.outSlowK).not.toEqual(0);
