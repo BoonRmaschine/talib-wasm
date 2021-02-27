@@ -1,0 +1,1 @@
+/usr/bin/c++ -pthread CMakeFiles/talibwasm_test.dir/main.cpp.o CMakeFiles/talibwasm_test.dir/talib/talib.test.cpp.o -o ../bin/talibwasm_test  ../lib/libgtest.a ../lib/libta-lib.a -lpthread 
